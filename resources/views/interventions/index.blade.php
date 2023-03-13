@@ -31,7 +31,7 @@
 
   </div>
   @endif
-<div x-cloak x-data="{open:false, show:false, showBox:false}">
-        <livewire:interventions :interventions="$interventions" />    
+<div x-cloak x-data="{open:false, show:false, showBox:false, on:false}">
+        <livewire:interventions :interventions="$interventions"  />    
 </div>
 @endsection

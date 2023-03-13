@@ -16,6 +16,7 @@ class AddInterventionForm extends Component
     public $intervention_type;
     public $solutions;
     public $clients;
+    
 
     public $name;
     public $date;
@@ -26,6 +27,7 @@ class AddInterventionForm extends Component
     public $type_interventions_id;
     public $solution_id;
 
+    
 
     public function create()
     {
@@ -44,7 +46,6 @@ class AddInterventionForm extends Component
         Validator::make($input,[
             'name'=>['required', 'string', 'max:255'],
             'date'=>['required'],
-            'status'=>['required'],
             'image'=>['required','image'],
             'client_id'=>['required'],
             'type_interventions_id'=>['required'],
@@ -56,7 +57,7 @@ class AddInterventionForm extends Component
         Intervention::create([
             'name'=>$input['name'],
             'date'=>$input['date'],
-            'status'=>filter_var($input['status'],FILTER_VALIDATE_BOOLEAN),
+            'status'=>$input['status'],
             'image'=>$input['image']->hashName(),
             'client_id'=>intval($input['client_id']),
             'type_interventions_id'=>intval($input['type_interventions_id']),

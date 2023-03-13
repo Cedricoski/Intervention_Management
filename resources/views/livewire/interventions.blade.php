@@ -1,7 +1,10 @@
 
-<div class="px-4 sm:px-6 lg:px-8">
+<div class="px-4 sm:px-6 lg:px-8" >
+@if ($editDatas)
+<livewire:update-intervention-form :editDatas="$editDatas"/>
+@endif
 <livewire:add-intervention-form/>
-<livewire:update-intervention-form :data="$editDatas"/>
+
 
 
     <div class="sm:flex sm:items-center">
@@ -47,7 +50,7 @@
                                         </svg>
 
                                     </button>
-                                    <button @click="show=!show; open=false;" wire:click="getDataForEdit({{$intervention->id}}) class=" hover:text-indigo-700 inline-block"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <button @click="show=!show; open=false;" wire:click="getDataForEdit({{$intervention->id}})" class=" hover:text-indigo-700 inline-block"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                         </svg></button>
                                     <a href="#" class=" hover:text-indigo-700 inline-block">
@@ -72,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <div class="relative z-10" @keydown.window.escape="showBox=false" x-show="showBox" x-init='$watch("showBox", o => !o && window.setTimeout(() => (open = false), 1000))' aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="relative z-10" @keydown.window.escape="showBox=false" x-show="showBox" >
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" x-show="showBox" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
 
             <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -80,7 +83,8 @@
                     <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-6xl sm:p-6" x-show="showBox" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" @click.away="showBox = false">
                         <div>
                             <div class="mt-3 text-center sm:mt-5">
-                                @if ($datas)
+                                @if (count($datas)>0)
+                                
                                 @foreach ($datas as $data)
                                 <h1 class="text-3xl m-10 font-semibold leading-6 text-gray-900" id="modal-title">{{$data->name}}</h1>
 

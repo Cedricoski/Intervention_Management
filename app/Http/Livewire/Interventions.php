@@ -12,6 +12,7 @@ class Interventions extends Component
     public $editDatas=[];
     
 
+    
     public function getDatas($id)
     {
         $this->datas = Intervention::where('id',$id)->get();
@@ -20,8 +21,9 @@ class Interventions extends Component
 
     public function getDataForEdit($id)
     {
-        $this->editDatas = Intervention::where('id',$id)->get();
-       
+        
+        $this->editDatas = Intervention::find($id);
+        
     }
 
     public function render()

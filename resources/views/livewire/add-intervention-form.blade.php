@@ -1,4 +1,8 @@
-<form id="addInterventionForm" x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="space-y-8 divide-y divide-gray-200" wire:submit.prevent="create">
+<form id="addInterventionForm" x-show="open" x-data="{
+    init() {
+        $wire.set('status',on)
+    }
+}" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="space-y-8 divide-y divide-gray-200" wire:submit.prevent="create">
 
     @csrf
     <div class="pt-8">
@@ -42,30 +46,14 @@
                 <label class="block text-sm font-medium leading-6 text-gray-900">Statut</label>
                 <div class="flex">
                     <div class="relative flex items-start mt-4">
-                        <div class="flex h-6 items-center">
-                            <input wire:model="status" id="enCours" name="status" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" value="true">
-                            @error('status')
-                            <span class="text-red-400 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="ml-3">
-                            <label for="enCours" class="text-sm font-medium leading-6 text-gray-900">En cours</label>
-                        </div>
+                        <button  type="button" @click="on=!on; $wire.set('status',on)" :class="{ 'bg-indigo-500':on, 'bg-gray-200':!on }" class="bg-gray-200 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2" role="switch" aria-checked="false">
+                            <span class="sr-only">Statut</span>
+                            <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+                            <span aria-hidden="true" class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out" :class="{ 'translate-x-5':(on), 'translate-x-0':!(on) }"></span>
+                        </button>
 
                     </div>
-                    <div class="relative flex items-start mt-4 ml-4">
-                        <div class="flex h-6 items-center">
-                            <input wire:model="status" id="clos" name="status" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" value="false">
-                            @error('status')
-                            <span class="text-red-400 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="ml-3">
-                            <label for="clos" class="text-sm font-medium leading-6 text-gray-900">Clos</label>
 
-                        </div>
-
-                    </div>
                 </div>
 
 
@@ -76,18 +64,18 @@
             <div class="sm:col-span-3">
                 <label for="solution" class="block text-sm font-medium leading-6 text-gray-900">Solution</label>
                 <div class="flex flex-auto items-center">
-                <select id="solution" wire:model="solution_id" name="solution_id" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    <option></option>
-                    @foreach ($solutions as $solution )
-                    <option class=" hover:bg-gray-300" value="{{ $solution->id }}">{{ $solution->title }}</option>
-                    @endforeach
-                </select>
-                <a class="mt-2 hover:text-indigo-500" href="{{ route('solutions') }}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </a>
+                    <select id="solution" wire:model="solution_id" name="solution_id" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <option></option>
+                        @foreach ($solutions as $solution )
+                        <option class=" hover:bg-gray-300" value="{{ $solution->id }}">{{ $solution->title }}</option>
+                        @endforeach
+                    </select>
+                    <a class="mt-2 hover:text-indigo-500" href="{{ route('solutions') }}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </a>
                 </div>
-                
+
                 @error('solution_id')
                 <span class="text-red-400 text-sm">{{ $message }}</span>
                 @enderror
@@ -95,18 +83,18 @@
             <div class="sm:col-span-3">
                 <label for="client" class="block text-sm font-medium leading-6 text-gray-900">Client</label>
                 <div class="flex flex-auto items-center">
-                <select id="client" wire:model="client_id" name="client_id" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    <option></option>
-                    @foreach ($clients as $client )
-                    <option class=" hover:bg-gray-300" value="{{ $client->id }}">{{ $client->name }}</option>
-                    @endforeach
-                </select>
-                <a class="mt-2 hover:text-indigo-500" href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </a>
+                    <select id="client" wire:model="client_id" name="client_id" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <option></option>
+                        @foreach ($clients as $client )
+                        <option class=" hover:bg-gray-300" value="{{ $client->id }}">{{ $client->name }}</option>
+                        @endforeach
+                    </select>
+                    <a class="mt-2 hover:text-indigo-500" href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </a>
                 </div>
-                
+
                 @error('client_id')
                 <span class="text-red-400 text-sm">{{ $message }}</span>
                 @enderror

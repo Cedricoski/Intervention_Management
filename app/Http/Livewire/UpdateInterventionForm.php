@@ -14,8 +14,16 @@ class UpdateInterventionForm extends Component
     public $intervention_type;
     public $solutions;
     public $clients;
-
-    public $datas;
+    public $editDatas;
+    
+    public $name;
+    public $date;
+    public $status;
+    public $image;
+    public $user_id;
+    public $client_id;
+    public $type_interventions_id;
+    public $solution_id;
     
     public function render()
     {
