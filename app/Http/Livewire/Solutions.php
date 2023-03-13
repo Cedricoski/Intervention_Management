@@ -12,6 +12,11 @@ class Solutions extends Component
     
     public $solution;
     
+    public function goBack()
+    {
+        return redirect()->back();
+    }
+
     public function render()
     {
         return view('livewire.solutions');

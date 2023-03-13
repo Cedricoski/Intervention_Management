@@ -9,6 +9,8 @@ class Intervention extends Model
 {
     use HasFactory;
 
+    protected $fillable=['name','date','status','image','client_id','type_interventions_id','solution_id'];
+
     public static function boot()
     {
         parent::boot();

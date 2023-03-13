@@ -1,10 +1,10 @@
-<form id="addInterventionForm" x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="space-y-8 divide-y divide-gray-200" wire:submit.prevent="create">
+<form id="updateInterventionForm" x-show="show" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="space-y-8 divide-y divide-gray-200" wire:submit.prevent="create">
 
     @csrf
     <div class="pt-8">
         <div>
-            <h3 class="text-base font-semibold leading-6 text-gray-900">Ajouter une intervention</h3>
-            <p class="mt-1 text-sm text-gray-500">Enregistrez votre intervention dans notre base de données!</p>
+            <h3 class="text-base font-semibold leading-6 text-gray-900">Editer</h3>
+            <p class="mt-1 text-sm text-gray-500">Modifiez et enregistrez votre intervention dans notre base de données!</p>
         </div>
         <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <div class="sm:col-span-3">
@@ -50,6 +50,7 @@
                         </div>
                         <div class="ml-3">
                             <label for="enCours" class="text-sm font-medium leading-6 text-gray-900">En cours</label>
+
                         </div>
 
                     </div>

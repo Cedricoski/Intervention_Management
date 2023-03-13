@@ -7,7 +7,6 @@
 
     <title>Upwork</title>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script src="../../../node_modules/dist/js/index.min.js"></script>
     @vite('resources/css/app.css')
     <style>
         [x-cloak] {
