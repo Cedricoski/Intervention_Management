@@ -8,4 +8,8 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 8dfc8a3 (add turbolinks)
 });

@@ -73,4 +73,5 @@ class AddInterventionForm extends Component
         $this->clients=Client::all();
         return view('livewire.add-intervention-form');
     }
+    
 }

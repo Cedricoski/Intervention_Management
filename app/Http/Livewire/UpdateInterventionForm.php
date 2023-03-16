@@ -18,12 +18,29 @@ class UpdateInterventionForm extends Component
     
     public $name;
     public $date;
-    public $status;
+    public bool $status;
     public $image;
     public $user_id;
     public $client_id;
     public $type_interventions_id;
     public $solution_id;
+
+    public function mount()
+    {
+        $this->status = $this->editDatas->status;
+       
+    }
+    
+
+    public function statut()
+    {
+        if ($this->status) {
+            
+            $this->status=false;
+        }else{
+            $this->status=true;
+        }
+    }
     
     public function render()
     {

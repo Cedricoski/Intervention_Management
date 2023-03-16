@@ -4,15 +4,28 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <title>Intervention Management</title>
-    
+
     @vite('resources/css/app.css')
+
+
+
+
     <style>
         [x-cloak] {
             display: none;
         }
+
+        .turbolinks-progress-bar {
+            height: 2.5px;
+            background-color: #6600ff;
+        }
     </style>
+
+
+
+
     @livewireStyles
 </head>
 
@@ -37,9 +50,18 @@
 
     </div>
     </div>
+<<<<<<< HEAD
     
     @livewireScripts
     
+=======
+
+    @livewireScripts
+
+    @vite('resources/js/app.js')
+
+
+>>>>>>> 8dfc8a3 (add turbolinks)
 </body>
 
 </html>

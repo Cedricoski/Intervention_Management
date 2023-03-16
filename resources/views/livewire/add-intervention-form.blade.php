@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 <form id="addInterventionForm" x-show="open" x-data="{
     init() {
         $wire.set('status',on)
     }
 }" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="space-y-8 divide-y divide-gray-200" wire:submit.prevent="create">
+=======
+<form id="addInterventionForm" x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="space-y-8 divide-y divide-gray-200" wire:submit.prevent="create">
+>>>>>>> 8dfc8a3 (add turbolinks)
 
     @csrf
     <div class="pt-8">
@@ -46,7 +50,11 @@
                 <label class="block text-sm font-medium leading-6 text-gray-900">Statut</label>
                 <div class="flex">
                     <div class="relative flex items-start mt-4">
+<<<<<<< HEAD
                         <button  type="button" @click="on=!on; $wire.set('status',on)" :class="{ 'bg-indigo-500':on, 'bg-gray-200':!on }" class="bg-gray-200 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2" role="switch" aria-checked="false">
+=======
+                        <button type="button" @click="on=!on; $wire.set('status',on)" :class="{ 'bg-indigo-500':on, 'bg-gray-200':!on }" class="bg-gray-200 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2" role="switch" aria-checked="false">
+>>>>>>> 8dfc8a3 (add turbolinks)
                             <span class="sr-only">Statut</span>
                             <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
                             <span aria-hidden="true" class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out" :class="{ 'translate-x-5':(on), 'translate-x-0':!(on) }"></span>
@@ -138,4 +146,8 @@
         </div>
     </div>
 
+<<<<<<< HEAD
 </form>
+=======
+</form>
+>>>>>>> 8dfc8a3 (add turbolinks)

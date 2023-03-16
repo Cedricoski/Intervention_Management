@@ -31,7 +31,11 @@
 
   </div>
   @endif
+<<<<<<< HEAD
 <div x-cloak x-data="{open:false, show:false, showBox:false, on:false}">
+=======
+<div  x-cloak x-data="{open:false, show:false, showBox:false, on:false}">
+>>>>>>> 8dfc8a3 (add turbolinks)
         <livewire:interventions :interventions="$interventions"  />    
 </div>
 @endsection

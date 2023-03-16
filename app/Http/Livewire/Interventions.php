@@ -10,8 +10,8 @@ class Interventions extends Component
     public $interventions;
     public $datas=[];
     public $editDatas=[];
-    
 
+   
     
     public function getDatas($id)
     {
@@ -24,6 +24,16 @@ class Interventions extends Component
         
         $this->editDatas = Intervention::find($id);
         
+    }
+
+    public function resetDatas()
+    {
+        $this->reset('datas');
+    }
+
+    public function resetEditDatas()
+    {
+        $this->reset('editDatas');
     }
 
     public function render()
