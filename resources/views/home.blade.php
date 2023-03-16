@@ -2,13 +2,8 @@
 
 @section('content')
 
-<<<<<<< HEAD
-<div>
-  
-=======
 <div >
 
->>>>>>> 8dfc8a3 (add turbolinks)
   <h3 class="text-base font-semibold leading-6 text-gray-900">Total</h3>
   <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
     <div class="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6">

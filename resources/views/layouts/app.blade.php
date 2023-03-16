@@ -50,18 +50,12 @@
 
     </div>
     </div>
-<<<<<<< HEAD
-    
-    @livewireScripts
-    
-=======
 
     @livewireScripts
 
     @vite('resources/js/app.js')
 
 
->>>>>>> 8dfc8a3 (add turbolinks)
 </body>
 
 </html>

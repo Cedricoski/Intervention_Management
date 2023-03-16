@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<form id="updateInterventionForm" x-show="show" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="space-y-8 divide-y divide-gray-200" wire:submit.prevent="create">
-
-=======
 
 <form id="updateInterventionForm" x-show="show" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90" class="space-y-8 divide-y divide-gray-200">
 <div  class="la-ball-triangle-path la-dark la-3x">
@@ -9,7 +5,6 @@
     <div></div>
     <div></div>
 </div>
->>>>>>> 8dfc8a3 (add turbolinks)
     @csrf
     <div class="pt-8">
         <div>
@@ -42,14 +37,9 @@
                 <div class="mt-2">
                     <input wire:model="image" x-init="$wire.set('image','{{$editDatas->image}}')" name="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" accept="image/*">
                     @error('image')
-<<<<<<< HEAD
-                    <span class="text-red-400 text-sm">{{ $message }}</span>
-                    @enderror
-=======
                         <span class="text-red-400 text-sm">{{ $message }}</span>
                     @enderror
                     <span class="text-yellow-300">Laissez ce champ vide au cas où vous ne voulez pas changer d'image</span>
->>>>>>> 8dfc8a3 (add turbolinks)
                 </div>
 
             </div>
@@ -58,18 +48,11 @@
                 <label class="block text-sm font-medium leading-6 text-gray-900">Statut</label>
                 <div class="flex">
                     <div class="relative flex items-start mt-4">
-<<<<<<< HEAD
-                        <button type="button" x-init="$wire.set('status',{{$editDatas->status}})" @click="$wire.set('status',{{!$editDatas->status}})"  :class="{ 'bg-indigo-500':{{$editDatas->status}}, 'bg-gray-200':{{!$editDatas->status}} }" class="bg-gray-200 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2" role="switch" aria-checked="false">
-                            <span class="sr-only">Statut</span>
-                            <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
-                            <span aria-hidden="true" class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out" :class="{ 'translate-x-5':{{$editDatas->status}}, 'translate-x-0':{{$editDatas->status}} "></span>
-=======
                         
                         <button type="button" @click="$wire.statut()" :class="{ 'bg-indigo-500':{{$status===true?'true':'false'}}, 'bg-gray-200':{{$status===false?'true':'false'}} }" class="bg-gray-200 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2" role="switch" aria-checked="false">
                             <span class="sr-only">Statut</span>
                             <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
                             <span aria-hidden="true" class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out" :class="{ 'translate-x-5':{{$status===true?'true':'false'}}, 'translate-x-0':{{$status===false?'true':'false'}} }"></span>
->>>>>>> 8dfc8a3 (add turbolinks)
                         </button>
 
                     </div>
@@ -84,17 +67,10 @@
             <div class="sm:col-span-3">
                 <label for="solution" class="block text-sm font-medium leading-6 text-gray-900">Solution</label>
                 <div class="flex flex-auto items-center">
-<<<<<<< HEAD
-                    <select id="solution" wire:model="solution_id" name="solution_id" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        <option></option>
-                        @foreach ($solutions as $solution )
-                        <option class=" hover:bg-gray-300" value="{{ $solution->id }}">{{ $solution->title }}</option>
-=======
                     <select id="solution" wire:model="solution_id" x-init="$wire.set('solution_id','{{$editDatas->solution_id}}')"  name="solution_id" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         <option></option>
                         @foreach ($solutions as $solution )
                         <option class=" hover:bg-gray-300" value="{{ $solution->id }}" {{ $editDatas->solution_id===$solution->id?'selected=selected':'' }}>{{ $solution->title }}</option>
->>>>>>> 8dfc8a3 (add turbolinks)
                         @endforeach
                     </select>
                     <a class="mt-2 hover:text-indigo-500" href="{{ route('solutions') }}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -110,17 +86,10 @@
             <div class="sm:col-span-3">
                 <label for="client" class="block text-sm font-medium leading-6 text-gray-900">Client</label>
                 <div class="flex flex-auto items-center">
-<<<<<<< HEAD
-                    <select id="client" wire:model="client_id" name="client_id" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        <option></option>
-                        @foreach ($clients as $client )
-                        <option class=" hover:bg-gray-300" value="{{ $client->id }}">{{ $client->name }}</option>
-=======
                     <select id="client" wire:model="client_id" x-init="$wire.set('client_id','{{$editDatas->client_id}}')" name="client_id" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         <option></option>
                         @foreach ($clients as $client )
                         <option class=" hover:bg-gray-300" value="{{ $client->id }}" {{ $editDatas->client_id===$client->id?'selected=selected':'' }}>{{ $client->name }}</option>
->>>>>>> 8dfc8a3 (add turbolinks)
                         @endforeach
                     </select>
                     <a class="mt-2 hover:text-indigo-500" href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -147,11 +116,7 @@
                     @foreach ($intervention_type as $type )
                     <div class="relative flex items-start">
                         <div class="flex h-6 items-center">
-<<<<<<< HEAD
-                            <input wire:model="type_interventions_id" id="{{ $type->label }}" name="type_interventions_id" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" value="{{ $type->id }}">
-=======
                             <input wire:model="type_interventions_id" x-init="$wire.set('type_interventions_id','{{$editDatas->type_interventions_id}}')" id="{{ $type->label }}" name="type_interventions_id" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" value="{{ $type->id }}" {{ $editDatas->type_interventions_id===$type->id?'checked=checked':'' }}>
->>>>>>> 8dfc8a3 (add turbolinks)
                             @error('type_interventions_id')
                             <span class="text-red-400 text-sm">{{ $message }}</span>
                             @enderror
