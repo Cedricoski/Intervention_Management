@@ -55,7 +55,7 @@
 
       </div>
 
-      <a href="{{ URL::previous() }}" class=" text-indigo-500 hover:text-indigo-800">Retour</a>
+      <a href="{{ route('solutions') }}" class=" text-indigo-500 hover:text-indigo-800">Retour</a>
     </div>
     <div x-show="close" class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
 

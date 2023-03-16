@@ -50,5 +50,6 @@
 @foreach ($solutions as $solution)
 <livewire:solutions :solution="$solution"/>
 @endforeach
+
 {{$solutions->links()}}
 @endsection

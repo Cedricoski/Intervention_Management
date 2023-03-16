@@ -1,9 +1,8 @@
-
-<div class="px-4 sm:px-6 lg:px-8" >
-@if ($editDatas)
-<livewire:update-intervention-form :editDatas="$editDatas"/>
-@endif
-<livewire:add-intervention-form/>
+<div class="px-4 sm:px-6 lg:px-8">
+    @if ($editDatas)
+    <livewire:update-intervention-form :editDatas="$editDatas" />
+    @endif
+    <livewire:add-intervention-form />
 
 
 
@@ -15,7 +14,7 @@
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
             <button type="button" class="block rounded-md bg-indigo-600 py-1.5 px-3 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onclick="document.getElementById('addInterventionForm').reset();" @click="open=!open; show=false;showBox=false; $wire.resetDatas();{{ $editDatas?'$wire.resetEditDatas()':'' }}">Ajouter</button>
         </div>
-        
+
     </div>
     <div class="mt-8 flow-root">
         <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -33,6 +32,7 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
+
                             @if (count($interventions)>0)
                             @foreach ($interventions as $intervention)
                             <tr>
@@ -64,20 +64,26 @@
                                 </td>
                             </tr>
                             @endforeach
+
                             @else
-                                <tr><td colspan="6" class=" text-center font-extralight">Aucune donnée disponible</td></tr>
+                            <tr>
+                                <td colspan="6" class=" text-center font-extralight">Aucune donnée disponible</td>
+                            </tr>
                             @endif
-                            
+
 
 
                             <!-- More people... -->
                         </tbody>
                     </table>
+
                 </div>
+                {{ $interventions->links()}}
             </div>
+
         </div>
         @if (count($datas)>0)
-        <div class="relative z-10" @keydown.window.escape="showBox=false; $wire.resetDatas();{{ $editDatas?'$wire.resetEditDatas()':'' }}" x-show="showBox" >
+        <div class="relative z-10" @keydown.window.escape="showBox=false; $wire.resetDatas();{{ $editDatas?'$wire.resetEditDatas()':'' }}" x-show="showBox">
             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" x-show="showBox" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"></div>
 
             <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -85,60 +91,60 @@
                     <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-6xl sm:p-6" x-show="showBox" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" @click.away="showBox = false; $wire.resetDatas();{{ $editDatas?'$wire.resetEditDatas()':'' }}">
                         <div>
                             <div class="mt-3 text-center sm:mt-5">
-                               
-                                
+
+
                                 @foreach ($datas as $data)
                                 <h1 class="text-3xl m-10 font-semibold leading-6 text-gray-900" id="modal-title">{{$data->name}}</h1>
 
                                 <div>
                                     <img src="{{asset('storage/images/'.$data->image)}}" style="width:800px; display:inline-block;"></td>
                                     <table class="min-w-full divide-y divide-gray-300">
-                                    <tbody class="bg-white">
-                                        <!-- Odd row -->
+                                        <tbody class="bg-white">
+                                            <!-- Odd row -->
 
-                                        <tr>
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">Nom</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$data->name}}</td>
-                                        </tr>
-                                        <tr class="bg-gray-50">
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3 ">Client</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$data->client->name}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">Intervenant</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$data->user->name}}</td>
-                                        </tr>
-                                        <tr class="bg-gray-50">
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">Status</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium {{ $data->status===1?'bg-green-100 text-green-800':'bg-red-100 text-red-800'}}  capitalize">{{$data->status===1?'En cours':'Clos'}}</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">Date</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$data->date}}</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">Solution</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            @if ($data->solution)
-                                            
-                                            <a class=" hover:text-indigo-500" href="{{ route('showSolution',['id'=>$data->solution->id]) }}">Cliquez ici pour voir la solution</a> 
-                                            @else
-                                               Aucune solution 
-                                            @endif    
-                                           </td>
-                                        </tr>
-                                        <!-- More people... -->
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">Nom</td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$data->name}}</td>
+                                            </tr>
+                                            <tr class="bg-gray-50">
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3 ">Client</td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$data->client->name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">Intervenant</td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$data->user->name}}</td>
+                                            </tr>
+                                            <tr class="bg-gray-50">
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">Status</td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium {{ $data->status===1?'bg-green-100 text-green-800':'bg-red-100 text-red-800'}}  capitalize">{{$data->status===1?'En cours':'Clos'}}</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">Date</td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$data->date}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">Solution</td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    @if ($data->solution)
+
+                                                    <a class=" hover:text-indigo-500" href="{{ route('showSolution',['id'=>$data->solution->id]) }}">Cliquez ici pour voir la solution</a>
+                                                    @else
+                                                    Aucune solution
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <!-- More people... -->
+                                        </tbody>
+                                    </table>
                                 </div>
-                                
+
 
 
 
 
                                 @endforeach
-                            
+
 
 
                             </div>
@@ -151,6 +157,8 @@
                 </div>
             </div>
         </div>
-        @endif 
+        @endif
+
     </div>
+
 </div>

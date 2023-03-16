@@ -4,10 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Models\Intervention;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Interventions extends Component
 {
-    public $interventions;
+    use WithPagination;
+    
     public $datas=[];
     public $editDatas=[];
 
@@ -38,8 +40,10 @@ class Interventions extends Component
 
     public function render()
     {
+        $interventions = paginate(auth()->user()->interventions);
+        
         return view('livewire.interventions',[
-            'interventions'=>$this->interventions
+            'interventions'=> $interventions
         ]);
     }
 }

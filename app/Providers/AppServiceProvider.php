@@ -20,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        require_once base_path('app/helpers/paginate.php');
         Schema::defaultStringLength(255);
     }
 }

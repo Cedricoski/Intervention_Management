@@ -32,6 +32,6 @@
   </div>
   @endif
 <div  x-cloak x-data="{open:false, show:false, showBox:false, on:false}">
-        <livewire:interventions :interventions="$interventions"  />    
+        <livewire:interventions/>    
 </div>
 @endsection

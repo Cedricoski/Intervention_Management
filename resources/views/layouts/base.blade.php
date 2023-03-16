@@ -12,15 +12,21 @@
         [x-cloak] {
             display: none;
         }
-    
+
+        .turbolinks-progress-bar {
+            height: 2.5px;
+            background-color: #6600ff;
+        }
     </style>
-    
+
 </head>
 
 <body class="h-full">
-   
-        @yield('content')
-    
+
+    @yield('content')
+
+    @vite('resources/js/app.js')
+
 </body>
 
 </html>
