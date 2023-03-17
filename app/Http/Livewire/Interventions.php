@@ -12,7 +12,7 @@ class Interventions extends Component
     
     public $datas=[];
     public $editDatas=[];
-
+    public $deleteDatas=[];
    
     
     public function getDatas($id)
@@ -28,6 +28,12 @@ class Interventions extends Component
         
     }
 
+    public function getDataForDelete($id)
+    {
+
+        $this->deleteDatas = Intervention::find($id);
+    }
+
     public function resetDatas()
     {
         $this->reset('datas');
@@ -38,6 +44,17 @@ class Interventions extends Component
         $this->reset('editDatas');
     }
 
+    public function resetDeleteDatas()
+    {
+        $this->reset('deleteDatas');
+    }
+
+    public function delete($id)
+    {
+        Intervention::where('id', $id)->delete();
+        return redirect()->route('interventions')->with('message', 'Suppression réussie');
+    }
+    
     public function render()
     {
         $interventions = paginate(auth()->user()->interventions);
@@ -46,4 +63,6 @@ class Interventions extends Component
             'interventions'=> $interventions
         ]);
     }
+
+
 }

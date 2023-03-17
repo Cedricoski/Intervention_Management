@@ -26,7 +26,7 @@ Route::group(['middleware','auth'], function(){
     Route::get('/solutions/{id}',[SolutionConroller::class,'show'])->middleware('auth')->name('showSolution');
     Route::post('/solutions/create',[SolutionConroller::class,'create'])->middleware('auth')->name('createSolution');
     Route::post('/solutions/delete/{id}',[SolutionConroller::class,'delete'])->middleware('auth')->name('deleteSolution');
-    Route::post('/solutions/update/{id}',[SolutionConroller::class,'update'])->middleware('auth')->name('updateSolution');
+    
 });
 
 Route::get('/home',function(){

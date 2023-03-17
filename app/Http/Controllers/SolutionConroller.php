@@ -26,19 +26,6 @@ class SolutionConroller extends Controller
         ]);       
     }
 
-    
-
-    public function update(Request $request,$id)
-    {
-        Solution::where('id',$id)->update(
-            [
-                'title'=>$request->title,
-                'description'=>$request->description,
-            ]
-        );
-        return redirect()->route('showSolution',['id'=>$id])->with('message','Edition réussie');       
-    }
-
     public function delete($id)
     {
         Solution::where('id',$id)->delete();
