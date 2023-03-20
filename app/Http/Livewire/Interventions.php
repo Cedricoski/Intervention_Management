@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Intervention;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,24 +14,21 @@ class Interventions extends Component
     public $datas=[];
     public $editDatas=[];
     public $deleteDatas=[];
-   
+    
+    
     
     public function getDatas($id)
     {
         $this->datas = Intervention::where('id',$id)->get();
-       
     }
 
     public function getDataForEdit($id)
     {
-        
-        $this->editDatas = Intervention::find($id);
-        
+        $this->editDatas = Intervention::find($id);   
     }
 
     public function getDataForDelete($id)
     {
-
         $this->deleteDatas = Intervention::find($id);
     }
 
@@ -57,11 +55,13 @@ class Interventions extends Component
     
     public function render()
     {
-        $interventions = paginate(auth()->user()->interventions);
         
-        return view('livewire.interventions',[
-            'interventions'=> $interventions
+        $interventions = paginate(auth()->user()->interventions);
+
+        return view('livewire.interventions', [
+            'interventions' => $interventions
         ]);
+        
     }
 
 

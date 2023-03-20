@@ -34,9 +34,9 @@
   </div>
   @endif
 
-  <div x-cloak x-data='{open : false, close : false}'>
-    <livewire:edit-solution :solution="$solution"/>
-    <div class="block border border-gray shadow-sm hover:shadow-md rounded mt-4 p-5">
+  <div class="w-full" x-cloak x-data='{open : false, close : false}'>
+    <livewire:edit-solution :solution="$solution" />
+    <div class="block  border border-gray shadow-sm hover:shadow-md rounded mt-4 p-5">
       <div class=" flex flex-auto items-center justify-between">
         <p class=" font-light text-justify max-w-3xl">{{ $solution->description }}</p>
         <div class=" flex">

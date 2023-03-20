@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\InterventionController;
 use App\Http\Controllers\SolutionConroller;
+use App\Http\Controllers\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,12 +22,12 @@ Route::get('/', function () {
 
 Route::group(['middleware','auth'], function(){
     
-    Route::get('/interventions',[InterventionController::class,'index'])->middleware('auth')->name('interventions');
-    Route::get('/solutions',[SolutionConroller::class,'index'])->middleware('auth')->name('solutions');
-    Route::get('/solutions/{id}',[SolutionConroller::class,'show'])->middleware('auth')->name('showSolution');
-    Route::post('/solutions/create',[SolutionConroller::class,'create'])->middleware('auth')->name('createSolution');
-    Route::post('/solutions/delete/{id}',[SolutionConroller::class,'delete'])->middleware('auth')->name('deleteSolution');
-    
+    Route::get('/interventions',[InterventionController::class,'index'])->name('interventions');
+    Route::get('/solutions',[SolutionConroller::class,'index'])->name('solutions');
+    Route::get('/solutions/{id}',[SolutionConroller::class,'show'])->name('showSolution');
+    Route::post('/solutions/create',[SolutionConroller::class,'create'])->name('createSolution');
+    Route::post('/solutions/delete/{id}',[SolutionConroller::class,'delete'])->name('deleteSolution');
+    Route::get('/profile',[User::class,'showProfile'])->name('profile');
 });
 
 Route::get('/home',function(){
