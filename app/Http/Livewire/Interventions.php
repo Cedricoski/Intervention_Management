@@ -49,7 +49,14 @@ class Interventions extends Component
 
     public function delete($id)
     {
+        $intervention = Intervention::where('id', $id)->get('image');
+        foreach ($intervention as $key) {
+            $image = $key->image;
+        }
+
+        unlink(public_path('storage/images/'.$image));
         Intervention::where('id', $id)->delete();
+
         return redirect()->route('interventions')->with('message', 'Suppression réussie');
     }
     

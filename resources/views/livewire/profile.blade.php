@@ -1,5 +1,6 @@
 <div class="overflow-hidden bg-white shadow sm:rounded-lg">
-    <div class="flex justify-between items-center">
+<livewire:edit-profile/>    
+<div class="flex justify-between items-center">
         <div class="px-4 py-5 sm:px-6">
             <h3 class="text-base font-semibold leading-6 text-gray-900">Informations du profil</h3>
             <p class="mt-1 max-w-2xl text-sm text-gray-500">Détails du profil personnel</p>

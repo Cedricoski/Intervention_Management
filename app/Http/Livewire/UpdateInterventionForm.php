@@ -71,7 +71,10 @@ class UpdateInterventionForm extends Component
         ])->validate();
 
         if ($input['image'] !== $this->oldImage) {
-            unlink(public_path('storage/images/' . $this->oldImage));
+            if (File::exists(public_path('storage/images/' . $this->oldImage))) {
+                unlink(public_path('storage/images/' . $this->oldImage));
+            }
+            
             $input['image']->store('images', 'public');
             $this->hashName=$input['image']->hashName();
 
@@ -87,7 +90,7 @@ class UpdateInterventionForm extends Component
             'type_interventions_id' => intval($input['type_interventions_id']),
             'solution_id' => intval($input['solution_id']),
         ]);
-        return redirect()->route('interventions')->with('message', 'Edition reussi');
+        return redirect()->route('interventions')->with('message', 'Edition reussie');
     }
     
 
