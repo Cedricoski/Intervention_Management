@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client;
 use App\Http\Controllers\InterventionController;
 use App\Http\Controllers\SolutionConroller;
 use App\Http\Controllers\User;
@@ -20,6 +21,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
+
 Route::group(['middleware','auth'], function(){
     
     Route::get('/interventions',[InterventionController::class,'index'])->name('interventions');
@@ -28,6 +31,9 @@ Route::group(['middleware','auth'], function(){
     Route::post('/solutions/create',[SolutionConroller::class,'create'])->name('createSolution');
     Route::post('/solutions/delete/{id}',[SolutionConroller::class,'delete'])->name('deleteSolution');
     Route::get('/profile',[User::class,'showProfile'])->name('profile');
+    Route::get('/users', [User::class, 'index'])->name('users');
+    Route::get('/clients', [Client::class, 'index'])->name('clients');
+    
 });
 
 Route::get('/home',function(){

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Intervention Management</title>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     @vite('resources/css/app.css')
 
 
@@ -29,7 +29,7 @@
     @livewireStyles
 </head>
 
-<body class="h-full">
+<body class="h-full" data-no-turbolink="true">
     @include('partials.sidebar')
     @include('partials.navbar')
     <main class="flex-1">
