@@ -31,8 +31,8 @@
 
 </div>
 @endif
-<livewire:user/>
-
-
+<div class="px-4 sm:px-6 lg:px-8" x-cloak x-data="{close:false, open:false, show:false}">
+    <livewire:user />
+</div>
 
 @endsection

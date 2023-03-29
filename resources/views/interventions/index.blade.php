@@ -33,7 +33,5 @@
 @endif
 <div x-cloak x-data="{open:false, show:false, showBox:false, on:false, close:false}">
   <livewire:interventions />
-  
-  
 </div>
 @endsection
