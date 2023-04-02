@@ -17,6 +17,8 @@ class Interventions extends Component
     public $deleteDatas=[];
     public $interventions=[];
 
+    public $userID;
+
     public function mount()
     {
         if (isAdmin()) {
@@ -32,7 +34,12 @@ class Interventions extends Component
         
         $words = $this->queryStatus;
         if (in_array($this->queryStatus,["true","false"])) {
-            $this->interventions = Intervention::where('status', filter_var($words, FILTER_VALIDATE_BOOLEAN))->get();
+            if ($this->userID !== null && $this->queryAuteur>2 && count($this->interventions)>0) {
+                $this->interventions = Intervention::where('status', filter_var($words, FILTER_VALIDATE_BOOLEAN))->where('user_id',$this->userID)->get();
+            }else{
+                $this->interventions = Intervention::where('status', filter_var($words, FILTER_VALIDATE_BOOLEAN))->get();
+            }
+            
 
         }else {
             $this->interventions = auth()->user()->interventions;
@@ -46,14 +53,23 @@ class Interventions extends Component
         
         $words ="%".$this->queryAuteur."%";
         $user_id=User::where('name','like', $words)->get('id');
+        
         foreach($user_id as $user){
-            $id = $user->id;
+            $this->userID = $user->id;
+            
         }
+        
         if(strlen($this->queryAuteur) >= 2) {
             try {
-                $this->interventions = Intervention::where('user_id', 'like', $id)->get();
+                if (in_array($this->queryStatus,["true","false"])) {
+                    $this->interventions = Intervention::where('user_id', 'like', $this->userID)->where('status',filter_var($this->queryStatus, FILTER_VALIDATE_BOOLEAN))->get();
+                }else{
+                    $this->interventions = Intervention::where('user_id', 'like', $this->userID)->get();
+                }
+                
             } catch (\Throwable $th) {
                 $this->interventions = [];
+                
             }
         }else {
 

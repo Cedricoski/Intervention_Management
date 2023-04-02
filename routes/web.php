@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 
 
-Route::group(['middleware','auth'], function(){
+Route::group(['middleware'=>'auth'], function(){
     
     Route::get('/interventions',[InterventionController::class,'index'])->name('interventions');
     Route::get('/solutions',[SolutionConroller::class,'index'])->name('solutions');

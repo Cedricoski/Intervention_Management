@@ -14,7 +14,8 @@
         </div>
         @if (isAdmin())
         <div class="items-center flex">
-            <div class="flex relative">
+            
+        <div class="flex relative">
 
                 <input wire:model="queryAuteur" type="text" class="rounded-full border border-gray-200 w-50 h-10 placeholder-gray-300 focus:border-none" placeholder="Filtre par auteur...">
                 <svg class="h-5 w-5 absolute right-0 mt-3 mr-2 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
