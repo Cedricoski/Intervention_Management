@@ -18,6 +18,8 @@ class Intervention extends Model
         static::creating(function($model){
             $model->user_id = auth()->user()->id;
         });
+
+        
     }
 
     public function scopeOnline()

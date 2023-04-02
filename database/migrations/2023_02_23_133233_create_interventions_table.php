@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('set null')->onUpdate('cascade');
             $table->foreign('type_interventions_id')->references('id')->on('type_interventions')->onDelete('set null')->onUpdate('cascade');
-            $table->foreign('solution_id')->references('id')->on('solutions')->onDelete('set null')->onUpdate('cascade');
+            $table->foreign('solution_id')->references('id')->on('solutions')->nullOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

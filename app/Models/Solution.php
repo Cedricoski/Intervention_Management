@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class Solution extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = ['title','description'];
 
     protected static function newFactory(): Factory

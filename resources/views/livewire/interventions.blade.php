@@ -12,6 +12,27 @@
 
             <p class="mt-2 text-sm text-gray-700">La liste de vos interventions</p>
         </div>
+        @if (isAdmin())
+        <div class="items-center flex">
+            <div class="flex relative">
+
+                <input wire:model="queryAuteur" type="text" class="rounded-full border border-gray-200 w-50 h-10 placeholder-gray-300 focus:border-none" placeholder="Filtre par auteur...">
+                <svg class="h-5 w-5 absolute right-0 mt-3 mr-2 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+            </div>
+            <div class=" ml-5">
+                <select id="status" wire:model="queryStatus" name="role_id" class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <option value="yes">Statut</option>
+
+                    <option value=true>En cours</option>
+                    <option value=false>Clos</option>
+
+                </select>
+            </div>
+        </div>
+
+        @endif
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
             <button type="button" class="block rounded-md bg-indigo-600 py-1.5 px-3 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onclick="document.getElementById('addInterventionForm').reset();" @click="open=!open; show=false;showBox=false; $wire.resetDatas();{{ $editDatas?'$wire.resetEditDatas()':'' }}">Ajouter</button>
         </div>
@@ -34,7 +55,7 @@
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
 
-                            @if (count($interventions)>0)
+                            @if (collect($interventions)->isNotEmpty())
                             @foreach ($interventions as $intervention)
                             <tr>
 
@@ -42,7 +63,12 @@
                                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{$intervention->client->name}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$intervention->date}}</td>
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium {{ $intervention->status===1?'bg-green-100 text-green-800':'bg-red-100 text-red-800'}}  capitalize">{{$intervention->status===1?'En cours':'Clos'}}</span></td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$intervention->user->name}}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                    @if ($intervention->user)
+                                    {{$intervention->user->name}}
+                                    @endif
+
+                                </td>
 
                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                     <button @click="showBox=true; open=false; show=false" wire:click="getDatas({{$intervention->id}})" class=" hover:text-indigo-700 inline-block">
@@ -73,7 +99,7 @@
 
                             @else
                             <tr>
-                                <td colspan="6" class=" text-center font-extralight">Aucune donnée disponible</td>
+                                <td colspan="6" class=" text-center font-extralight">Aucune donnée disponible pour "{{ $queryAuteur }}"</td>
                             </tr>
                             @endif
 
@@ -84,7 +110,8 @@
                     </table>
 
                 </div>
-                {{ $interventions->links()}}
+
+
             </div>
 
         </div>
