@@ -6,7 +6,7 @@ use App\Models\Intervention;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
-
+use Illuminate\Support\Facades\URL;
 class Interventions extends Component
 {
     use WithPagination;
@@ -42,7 +42,12 @@ class Interventions extends Component
             
 
         }else {
-            $this->interventions = auth()->user()->interventions;
+            if (isAdmin()) {
+                $this->interventions = Intervention::all();
+            }else{
+                $this->interventions = auth()->user()->interventions;
+            }
+            
         }
             
         
@@ -65,6 +70,8 @@ class Interventions extends Component
                     $this->interventions = Intervention::where('user_id', 'like', $this->userID)->where('status',filter_var($this->queryStatus, FILTER_VALIDATE_BOOLEAN))->get();
                 }else{
                     $this->interventions = Intervention::where('user_id', 'like', $this->userID)->get();
+                    
+                    
                 }
                 
             } catch (\Throwable $th) {
@@ -74,7 +81,12 @@ class Interventions extends Component
         }else {
 
             if (isAdmin()) {
-                $this->interventions = Intervention::all();
+                if (in_array($this->queryStatus,["true","false"])) {
+                    $this->interventions = Intervention::where('status',filter_var($this->queryStatus, FILTER_VALIDATE_BOOLEAN))->get();
+                }else{
+                    $this->interventions = Intervention::all();
+                }
+                
             } else {
                 $this->interventions = auth()->user()->interventions;
             }
@@ -127,20 +139,19 @@ class Interventions extends Component
         return redirect()->route('interventions')->with('message', 'Suppression réussie');
     }
     
+    
+
     public function render()
     {
-        if($this->queryAuteur !== null){
-            $interventions = $this->interventions;
-        }else{
-            $interventions = paginate(auth()->user()->interventions);
-        }
         
-
+        $intervent = paginate($this->interventions);
+        
         return view('livewire.interventions', [
-            'interventions' => $interventions
+            'intervent'=>$intervent
         ]);
         
     }
 
 
 }
+

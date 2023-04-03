@@ -17,9 +17,9 @@
             
         <div class="flex relative">
 
-                <input wire:model="queryAuteur" type="text" class="rounded-full border border-gray-200 w-50 h-10 placeholder-gray-300 focus:border-none" placeholder="Filtre par auteur...">
+                <input id="test" wire:model="queryAuteur" type="text" class="rounded-full border border-gray-200 w-50 h-10 placeholder-gray-300 focus:border-none" placeholder="Filtre par auteur..." data-autofocus>
                 <svg class="h-5 w-5 absolute right-0 mt-3 mr-2 text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" >
                 </svg>
             </div>
             <div class=" ml-5">
@@ -56,8 +56,8 @@
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
 
-                            @if (collect($interventions)->isNotEmpty())
-                            @foreach ($interventions as $intervention)
+                            @if (collect($intervent)->isNotEmpty())
+                            @foreach ($intervent as $intervention)
                             <tr>
 
                                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{$intervention->name}}</td>
@@ -114,7 +114,7 @@
 
 
             </div>
-
+        {{ $intervent->links() }}
         </div>
         @if (count($datas)>0)
         <div class="relative z-10" @keydown.window.escape="showBox=false; $wire.resetDatas();{{ $editDatas?'$wire.resetEditDatas()':'' }}" x-show="showBox">
