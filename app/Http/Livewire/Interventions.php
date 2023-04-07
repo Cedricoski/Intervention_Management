@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Client;
 use App\Models\Intervention;
 use App\Models\User;
 use Livewire\Component;
@@ -12,11 +13,11 @@ class Interventions extends Component
     use WithPagination;
     public $queryAuteur;
     public $queryStatus;    
+    public $queryClient;
     public $datas=[];
     public $editDatas=[];
     public $deleteDatas=[];
     public $interventions=[];
-
     public $userID;
 
     public function mount()
@@ -27,6 +28,34 @@ class Interventions extends Component
             $this->interventions = auth()->user()->interventions;
         }
         
+    }
+
+    public function UpdatedQueryClient()
+    {
+        $words = $this->queryClient;
+        
+            if (intval($words)!=0) {
+                $query = Intervention::where('client_id',intval($words));
+        
+                if (in_array($this->queryStatus,["true","false"])) {
+                    $query=$query->where('status', filter_var($this->queryStatus, FILTER_VALIDATE_BOOLEAN));
+                    
+                }
+               
+                $this->interventions = $query->get();
+                
+                
+            }else{
+                if (in_array($this->queryStatus,["true","false"])) {
+                    $this->interventions=Intervention::where('status', filter_var($this->queryStatus, FILTER_VALIDATE_BOOLEAN))->get();
+                    
+                }else{
+                    $this->interventions = Intervention::all();
+                }
+                
+            }
+            $this->resetPage();
+           
     }
 
     public function UpdatedQueryStatus()
@@ -49,9 +78,13 @@ class Interventions extends Component
             }
             
         }
-            
+        
+        $this->resetPage();
         
     }
+
+
+    
 
     public function UpdatedQueryAuteur()
     {
@@ -65,6 +98,7 @@ class Interventions extends Component
         }
         
         if(strlen($this->queryAuteur) >= 2) {
+            
             try {
                 if (in_array($this->queryStatus,["true","false"])) {
                     $this->interventions = Intervention::where('user_id', 'like', $this->userID)->where('status',filter_var($this->queryStatus, FILTER_VALIDATE_BOOLEAN))->get();
@@ -92,8 +126,8 @@ class Interventions extends Component
             }
         }
        
-       
-        
+       $this->resetPage();
+       $this->reset('userID');
     }
     
     public function getDatas($id)
@@ -145,13 +179,13 @@ class Interventions extends Component
     {
         
         $intervent = paginate($this->interventions);
-        
+        $clients  = Client::all();
         return view('livewire.interventions', [
-            'intervent'=>$intervent
+            'intervent'=>$intervent,
+            'clients'=>$clients
         ]);
         
     }
 
 
 }
-

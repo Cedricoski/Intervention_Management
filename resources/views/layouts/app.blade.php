@@ -7,11 +7,11 @@
 
     <title>Intervention Management</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    
     @vite('resources/css/app.css')
+    @livewireStyles
 
-
-
-
+   
     <style>
         [x-cloak] {
             display: none;
@@ -26,7 +26,7 @@
 
 
 
-    @livewireStyles
+   
 </head>
 
 <body class="h-full" data-no-turbolink="true">
@@ -50,12 +50,12 @@
 
     </div>
     </div>
-
+	
     @livewireScripts
 
     @vite('resources/js/app.js')
-
-
+	
+    
 </body>
 
 </html>

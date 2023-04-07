@@ -26,6 +26,7 @@ Route::get('/', function () {
 Route::group(['middleware'=>'auth'], function(){
     
     Route::get('/interventions',[InterventionController::class,'index'])->name('interventions');
+    Route::post('/interventions',[InterventionController::class,'test'])->name('test');
     Route::get('/solutions',[SolutionConroller::class,'index'])->name('solutions');
     Route::get('/solutions/{id}',[SolutionConroller::class,'show'])->name('showSolution');
     Route::post('/solutions/create',[SolutionConroller::class,'create'])->name('createSolution');
