@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-gray-100">
 
@@ -7,11 +8,14 @@
 
     <title>Intervention Management</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
     @vite('resources/css/app.css')
     @livewireStyles
 
-   
+
     <style>
         [x-cloak] {
             display: none;
@@ -26,7 +30,7 @@
 
 
 
-   
+
 </head>
 
 <body class="h-full" data-no-turbolink="true">
@@ -50,11 +54,12 @@
 
     </div>
     </div>
-	
+
     @livewireScripts
 
     @vite('resources/js/app.js')
-	
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     
 </body>
 

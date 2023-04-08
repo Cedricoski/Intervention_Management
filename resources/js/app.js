@@ -18,13 +18,7 @@ document.addEventListener('turbolinks:load', function () {
         
 })
 
-document.addEventListener('turbolinks:submit', function () {
-    alert('submitted')
-    Livewire.restart();
-    
-    
-        
-})
+
 
 
 
@@ -37,6 +31,10 @@ document.addEventListener('DOMContentLoaded',function(){
     
     
 })
+
+
+
+
 
 
 

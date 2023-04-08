@@ -10,7 +10,7 @@
     <div class="sm:flex sm:items-center">
         <div class="sm:flex-auto">
 
-            <p class="mt-2 text-sm text-gray-700">La liste de vos interventions</p>
+            <p class="mt-2 text-sm mr-2 text-gray-700">La liste de vos interventions</p>
         </div>
         @if (isAdmin())
         <div class="items-center flex">
@@ -41,7 +41,72 @@
                     @endforeach
                 </select>
             </div>
+            <div class="ml-5">
+                <input type="text" wire:model="queryDate" class=" block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6" name="daterange" />
+            </div>
+
+            
+            <script>
+
+                
+                
+                $(function() {
+                    $('input[name="daterange"]').daterangepicker({
+                        opens: 'left',
+                        autoUpdateInput: false,
+
+                        locale: {
+
+                            format: 'DD/MM/YYYY',
+                            "applyLabel": "Appliquer",
+                            "cancelLabel": "Annuler",
+                            "fromLabel": "De",
+                            "toLabel": "A",
+                            "customRangeLabel": "Modifier",
+                            "daysOfWeek": [
+                                "Dim",
+                                "Lun",
+                                "Mar",
+                                "Mer",
+                                "Jeu",
+                                "Ven",
+                                "Sam"
+                            ],
+                            "monthNames": [
+                                "Janvier",
+                                "Février",
+                                "Mars",
+                                "Avril",
+                                "Mai",
+                                "Juin",
+                                "Juillet",
+                                "Août",
+                                "Septembre",
+                                "Octobre",
+                                "Novembre",
+                                "Décembre"
+                            ]
+                        }
+                    });
+                    $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+                        $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
+                        
+                        @this.set('queryDate', ev.target.value);
+                    });
+
+                    $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
+                        $(this).val('');
+                        @this.set('queryDate', ev.target.value);
+                    });
+                });
+            </script>
+
+
         </div>
+
+
+
+
 
         @endif
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">

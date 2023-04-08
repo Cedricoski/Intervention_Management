@@ -24,9 +24,15 @@ class Intervention extends Model
 
     public function scopeOnline()
     {
-        $interventions = Intervention::where('status',1)
-        ->where('user_id',auth()->user()->id)
-        ->get();
+        if(isAdmin()){
+            $interventions = Intervention::where('status', 1)
+            ->get();
+        }else{
+            $interventions = Intervention::where('status', 1)
+                ->where('user_id', auth()->user()->id)
+                ->get();
+        }
+       
 
         return $interventions;
     }
@@ -34,10 +40,14 @@ class Intervention extends Model
 
     public function scopeOffline()
     {
-        $interventions = Intervention::where('status',0)
-        ->where('user_id',auth()->user()->id)
-        ->get();
-
+        if (isAdmin()) {
+            $interventions = Intervention::where('status', 0)
+            ->get();
+        } else {
+            $interventions = Intervention::where('status', 0)
+            ->where('user_id', auth()->user()->id)
+                ->get();
+        }
         return $interventions;
     }
 
