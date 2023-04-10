@@ -7,6 +7,7 @@ use App\Http\Controllers\User;
 use App\Models\Client as ModelsClient;
 use App\Models\Intervention;
 use App\Models\User as ModelsUser;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,8 +41,9 @@ Route::group(['middleware'=>'auth'], function(){
     
 });
 
-Route::get('/home',function(){
+Route::get('/home',function(Request $request){
     $title = 'Dashboard';
+    
     $interventions = Intervention::all();
     $interventions_by_client = ModelsClient::all();
     $interventions_by_user = ModelsUser::all();
