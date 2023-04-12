@@ -175,7 +175,7 @@
 
                             @else
                             <tr>
-                                <td colspan="6" class=" text-center font-extralight">Aucune donnée disponible pour "{{ $queryAuteur }}"</td>
+                                <td colspan="6" class=" text-center font-extralight">Aucune donnée disponible</td>
                             </tr>
                             @endif
 

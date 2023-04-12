@@ -1,15 +1,16 @@
 <div>
     <h3 class="text-base font-semibold leading-6 text-gray-900">Total</h3>
     <div class="items-center flex">
-        <div class="flex relative">
-
+        @if(isAdmin())
+        <div class="flex relative mr-5">
             <input id="test" wire:model="queryAuteur" type="text" class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Rechercher un auteur" data-autofocus>
             <svg class="h-5 w-5 absolute right-0 mt-2 mr-2 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z">
             </svg>
         </div>
-        <div class="ml-5">
-            <input type="text" wire:model="queryDate" class=" block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6" name="daterange" />
+        @endif
+        <div>
+            <input type="text"  placeholder="Rechercher par date" wire:model="queryDate" class=" block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6" name="daterange" />
         </div>
         <script>
             $(function() {
@@ -71,7 +72,7 @@
                 @if (isAdmin())
                 {{count($interventions)}}
                 @else
-                {{auth()->user()->interventions()->count()}}
+                {{count($interventions)}}
                 @endif
 
             </dd>

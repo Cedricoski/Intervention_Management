@@ -19,8 +19,12 @@ class Total extends Component
 
     public function mount()
     {
-        $this->interventions = Intervention::all();
-        
+        if (isAdmin()) {
+            $this->interventions = Intervention::all();
+        } else {
+
+            $this->interventions = Intervention::where('user_id', auth()->user()->id)->get();
+        }
     }
 
     public function UpdatedQueryDate()
@@ -31,27 +35,38 @@ class Total extends Component
             $end_str = str_replace('/', '-', $date_split[1]);
             $this->begin = date('Y-m-d', strtotime($begin_str));
             $this->end = date('Y-m-d', strtotime($end_str));
+            if (isAdmin()) {
+                $query = Intervention::whereBetween('date', [$this->begin, $this->end]);
+                $query2 = Intervention::whereBetween('date', [$this->begin, $this->end]);
+            } else {
+                $query = Intervention::whereBetween('date', [$this->begin, $this->end])->where('user_id', auth()->user()->id);
+                $query2 = Intervention::whereBetween('date', [$this->begin, $this->end])->where('user_id', auth()->user()->id);
+            }
 
-            $query = Intervention::whereBetween('date', [$this->begin, $this->end]);
-            $query2 = Intervention::whereBetween('date', [$this->begin, $this->end]);
-            
             if ($this->userID !== null && $this->queryAuteur > 2 && count($this->interventions) > 0) {
                 $query = $query->where('user_id', $this->userID);
                 $query2 = $query2->where('user_id', $this->userID);
             }
-            
+
             $this->interventions = $query->get();
             $this->onlineInterventions = $query->where('status', 1)->get();
             $this->offlineInterventions = $query2->where('status', 0)->get();
         } else {
-            $query = Intervention::query();
-            $query2 = Intervention::query();
-           
+            if (isAdmin()) {
+                $query = Intervention::query();
+                $query2 = Intervention::query();
+            } else {
+
+                $query = Intervention::query()->where('user_id', auth()->user()->id);
+                $query2 = Intervention::query()->where('user_id', auth()->user()->id);
+            }
+
+
             if ($this->userID !== null && $this->queryAuteur > 2 && count($this->interventions) > 0) {
                 $query = $query->where('user_id', $this->userID);
                 $query2 = $query2->where('user_id', $this->userID);
             }
-           
+
             $this->interventions = $query->get();
             $this->onlineInterventions = $query->where('status', 1)->get();
             $this->offlineInterventions = $query2->where('status', 0)->get();
@@ -73,39 +88,42 @@ class Total extends Component
             $query2 = Intervention::where('user_id', $this->userID);
             try {
                 if ($this->queryDate != "") {
+
                     $query = $query->whereBetween('date', [$this->begin, $this->end]);
                     $query2 = $query2->whereBetween('date', [$this->begin, $this->end]);
                 }
                 $this->interventions = $query->get();
-                $this->onlineInterventions = $query->where('status',1)->get();
+                $this->onlineInterventions = $query->where('status', 1)->get();
                 $this->offlineInterventions = $query2->where('status', 0)->get();
-                
             } catch (\Throwable $th) {
                 $this->interventions = [];
             }
         } else {
 
-            
+
+            if (isAdmin()) {
                 $query = Intervention::query();
                 $query2 = Intervention::query();
-                if ($this->queryDate != "") {
-                    $query = $query->whereBetween('date', [$this->begin, $this->end]);
-                    $query = $query2->whereBetween('date', [$this->begin, $this->end]);
-                }
-                $this->interventions = $query->get();
-                $this->onlineInterventions = $query->where('status',1)->get();
-                $this->offlineInterventions = $query2->where('status', 0)->get();
-                
-            
-        }
+            } else {
 
-        
+                $query = Intervention::query()->where('user_id', auth()->user()->id);
+                $query2 = Intervention::query()->where('user_id', auth()->user()->id);
+            }
+            if ($this->queryDate != "") {
+
+                $query = $query->whereBetween('date', [$this->begin, $this->end]);
+                $query2 = $query2->whereBetween('date', [$this->begin, $this->end]);
+            }
+            $this->interventions = $query->get();
+            $this->onlineInterventions = $query->where('status', 1)->get();
+            $this->offlineInterventions = $query2->where('status', 0)->get();
+        }
     }
 
     public function render()
     {
         $interventions = $this->interventions;
-        
-        return view('livewire.total',['interventions'=>$interventions]);
+
+        return view('livewire.total', ['interventions' => $interventions]);
     }
 }

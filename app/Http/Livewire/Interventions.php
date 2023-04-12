@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Client;
 use App\Models\Intervention;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\URL;
@@ -234,8 +235,10 @@ class Interventions extends Component
         foreach ($intervention as $key) {
             $image = $key->image;
         }
-
-        unlink(public_path('storage/images/' . $image));
+        if(File::exists(public_path('storage/images/' . $image))){
+             unlink(public_path('storage/images/' . $image));
+        }
+       
         Intervention::where('id', $id)->delete();
 
         return redirect()->route('interventions')->with('message', 'Suppression réussie');
